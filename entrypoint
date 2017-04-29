@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# update server.xml
+
+cat conf/server.xml.orig > conf/server.xml
+
+if [ ${CATALINA_CONNECTOR_PROXYNAME} ]
+then
+  xmlstarlet ed --insert Server/Service/Connector[@port=8080] --type attr -n proxyName -v ${CATALINA_CONNECTOR_PROXYNAME:-} conf/server.xml > conf/server.xml
+fi
+
+if [ ${CATALINA_CONNECTOR_PROXYPORT} ]
+then
+  xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n proxyPort -v ${CATALINA_CONNECTOR_PROXYPORT:-} conf/server.xml > conf/server.xml
+fi
+
+if [ ${CATALINA_CONNECTOR_SCHEME} ]
+then
+  xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n scheme -v ${CATALINA_CONNECTOR_SCHEME:-} conf/server.xml > conf/server.xml
+fi
+
+
+
+
+
+JAVA_HOME=/opt/java/
+export JAVA_HOME
+#yes
+./bin/catalina.sh run
