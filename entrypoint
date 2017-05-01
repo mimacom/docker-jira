@@ -6,17 +6,20 @@ cat conf/server.xml.orig > conf/server.xml
 
 if [ ${CATALINA_CONNECTOR_PROXYNAME} ]
 then
-  xmlstarlet ed --insert Server/Service/Connector[@port=8080] --type attr -n proxyName -v ${CATALINA_CONNECTOR_PROXYNAME:-} conf/server.xml > conf/server.xml
+  #xmlstarlet ed --insert Server/Service/Connector[@port=8080] --type attr -n proxyName -v ${CATALINA_CONNECTOR_PROXYNAME:-} conf/server.xml > conf/server.xml
+  xmlstarlet ed --inplace --insert Server/Service/Connector[@port=8080] --type attr -n proxyName -v ${CATALINA_CONNECTOR_PROXYNAME:-} conf/server.xml
 fi
 
 if [ ${CATALINA_CONNECTOR_PROXYPORT} ]
 then
-  xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n proxyPort -v ${CATALINA_CONNECTOR_PROXYPORT:-} conf/server.xml > conf/server.xml
+  #xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n proxyPort -v ${CATALINA_CONNECTOR_PROXYPORT:-} conf/server.xml > conf/server.xml
+  xmlstarlet ed --inplace --insert Server/Service/Connector[@port=8080] --type attr -n proxyPort -v ${CATALINA_CONNECTOR_PROXYPORT:-} conf/server.xml
 fi
 
 if [ ${CATALINA_CONNECTOR_SCHEME} ]
 then
-  xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n scheme -v ${CATALINA_CONNECTOR_SCHEME:-} conf/server.xml > conf/server.xml
+  #xmlstarlet ed   --insert Server/Service/Connector[@port=8080] --type attr -n scheme -v ${CATALINA_CONNECTOR_SCHEME:-} conf/server.xml > conf/server.xml
+  xmlstarlet ed --inplace --insert Server/Service/Connector[@port=8080] --type attr -n scheme -v ${CATALINA_CONNECTOR_SCHEME:-} conf/server.xml
 fi
 
 
