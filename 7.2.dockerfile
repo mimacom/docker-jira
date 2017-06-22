@@ -1,14 +1,12 @@
-FROM centos:7
+FROM mimacomops/centos7-java:jdk8-oracle
 MAINTAINER sysadmin@mimacom.com
 
 # Setup useful environment variables
 ENV JIRA_HOME     /var/atlassian/application-data/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_VERSION  7.2.8
-
-LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
-
 ENV JIRA_DOWNLOAD_URL https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-${JIRA_VERSION}.tar.gz
+LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
 
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
@@ -24,22 +22,14 @@ ENV CATALINA_CONNECTOR_SCHEME=
 # download oracle jre8
 RUN yum update -y && \
     yum install -y epel-release && \
-    yum install -y wget xmlstarlet && \
-    rm -rf /var/cache/yum/* && \
-    mkdir -p /opt/java && \
-    wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jre-8u121-linux-x64.tar.gz" -O /opt/jre.tar.gz && \
-    tar xfv /opt/jre.tar.gz -C /opt/java/ --strip-components=1 && \
-    rm -f /opt/jre.tar.gz
-
-# add java to PATH
-COPY java.sh /etc/profile.d/java.sh
+    yum install -y xmlstarlet && \
+    rm -rf /var/cache/yum/*
 
 # download jira
 RUN mkdir -p "${JIRA_HOME}" && \
     chmod -R 700 "${JIRA_HOME}" &&\
     chown ${RUN_USER}:${RUN_GROUP} "${JIRA_HOME}" && \
 
-#    mkdir -p "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/" && \
     mkdir -p "${JIRA_INSTALL}" && \
     curl -Ls "${JIRA_DOWNLOAD_URL}" | tar -xz --directory "${JIRA_INSTALL}" --strip-components=1 --no-same-owner && \
 
