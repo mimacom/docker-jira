@@ -4,7 +4,7 @@ MAINTAINER sysadmin@mimacom.com
 # Setup useful environment variables
 ENV JIRA_HOME     /var/atlassian/application-data/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.3.6
+ENV JIRA_VERSION  7.3.8
 
 LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
 
