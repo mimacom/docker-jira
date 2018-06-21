@@ -1,10 +1,10 @@
-FROM mimacomops/centos7-java:jdk8-oracle
+FROM mimacom/centos7-java:oraclejdk-8u151-b12
 MAINTAINER sysadmin@mimacom.com
 
 # Setup useful environment variables
 ENV JIRA_HOME     /var/atlassian/application-data/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.4.4
+ENV JIRA_VERSION  7.9.0
 ENV JIRA_DOWNLOAD_URL https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
 
@@ -35,9 +35,6 @@ RUN mkdir -p "${JIRA_HOME}" && \
 
     echo -e "\njira.home=${JIRA_HOME}" > "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" && \
     mv "${JIRA_INSTALL}/conf/server.xml" "${JIRA_INSTALL}/conf/server.xml.orig"
-
-# add mysql driver
-COPY mysql-connector-java-5.1.39-bin.jar "${JIRA_INSTALL}/lib/mysql-connector-java-5.1.39-bin.jar"
 
 # fix permissions on jira install folder
 RUN chmod -R 700 "${JIRA_INSTALL}" && \
