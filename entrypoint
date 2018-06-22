@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# update server.xml
+# wait for jira lock file to disappear
+while [ -f ${JIRA_HOME}/.jira-home.lock ]
+do
+  sleep 1
+  echo "${JIRA_HOME}/.jira-home.lock is present ..."
+  echo waiting for other node to terminate
+done
 
+# update server.xml
 cat conf/server.xml.orig > conf/server.xml
 
 if [ ${CATALINA_CONNECTOR_PROXYNAME} ]
