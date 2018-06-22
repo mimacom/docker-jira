@@ -23,6 +23,7 @@ ENV CATALINA_CONNECTOR_SCHEME=
 RUN yum update -y && \
     yum install -y epel-release && \
     yum install -y xmlstarlet && \
+    yum install -y supervisor && \
     rm -rf /var/cache/yum/*
 
 # download jira
@@ -62,5 +63,8 @@ WORKDIR ${JIRA_INSTALL}
 COPY entrypoint /entrypoint
 RUN chmod 755 /entrypoint
 
+# configure supervisord as initial process
+COPY supervisord.conf /etc/supervisord.conf
+
 # start
-ENTRYPOINT ["/entrypoint"]
+ENTRYPOINT ["/usr/bin/supervisord"]
