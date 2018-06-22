@@ -1,5 +1,8 @@
 #!/bin/bash
 
+trap 'kill -TERM $PID' TERM INT
+$JAVA_EXECUTABLE $JAVA_ARGS &
+
 # wait for jira lock file to disappear
 while [ -f ${JIRA_HOME}/.jira-home.lock ]
 do
@@ -31,9 +34,11 @@ fi
 
 
 
-
-
 JAVA_HOME=/opt/java/
 export JAVA_HOME
-#yes
-./bin/catalina.sh run
+./bin/catalina.sh run &
+PID=$!
+wait $PID
+trap - TERM INT
+wait $PID
+EXIT_STATUS=$?
