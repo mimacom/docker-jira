@@ -50,11 +50,6 @@ RUN chmod -R 700 "${JIRA_INSTALL}" && \
 # Expose default HTTP connector port.
 EXPOSE 8080
 
-# Set volume mount points for installation and home directory. Changes to the
-# home directory needs to be persisted as well as parts of the installation
-# directory due to eg. logs.
-VOLUME ["${JIRA_HOME}"]
-
 # Set the default working directory as the JIRA installation directory.
 WORKDIR ${JIRA_INSTALL}
 
