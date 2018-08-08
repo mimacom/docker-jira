@@ -4,12 +4,15 @@ trap 'kill -TERM $PID' TERM INT
 $JAVA_EXECUTABLE $JAVA_ARGS &
 
 # wait for jira lock file to disappear
-while [ -f ${JIRA_HOME}/.jira-home.lock ]
-do
-  sleep 1
-  echo "${JIRA_HOME}/.jira-home.lock is present ..."
-  echo waiting for other node to terminate
-done
+if [ "$CHECK_LOCK_FILE" = true ]
+then
+  while [ -f ${JIRA_HOME}/.jira-home.lock ]
+  do
+    sleep 1
+    echo "${JIRA_HOME}/.jira-home.lock is present ..."
+    echo waiting for other node to terminate
+  done
+fi
 
 # update server.xml
 cat conf/server.xml.orig > conf/server.xml

@@ -4,7 +4,7 @@ MAINTAINER sysadmin@mimacom.com
 # Setup useful environment variables
 ENV JIRA_HOME     /var/atlassian/application-data/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.11.1
+ENV JIRA_VERSION  7.8.4
 ENV JIRA_DOWNLOAD_URL https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
 
@@ -14,7 +14,8 @@ LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian
 ENV RUN_USER            daemon
 ENV RUN_GROUP           daemon
 
-# Reverse proxy environment variables
+# User configurable environment variables
+ENV CHECK_LOCK_FILE=true
 ENV CATALINA_CONNECTOR_PROXYNAME=
 ENV CATALINA_CONNECTOR_PROXYPORT=
 ENV CATALINA_CONNECTOR_SCHEME=
