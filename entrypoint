@@ -1,7 +1,6 @@
 #!/bin/bash
 
 trap 'kill -TERM $PID' TERM INT
-$JAVA_EXECUTABLE $JAVA_ARGS &
 
 # wait for jira lock file to disappear
 if [ "$CHECK_LOCK_FILE" = true ]
