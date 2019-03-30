@@ -5,7 +5,7 @@ MAINTAINER sysadmin@mimacom.com
 ENV JIRA_HOME     /var/atlassian/application-data/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
 ENV JIRA_VERSION  8.0.2
-ENV JIRA_DOWNLOAD_URL https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-${JIRA_VERSION}.tar.gz
+ENV JIRA_DOWNLOAD_URL https://product-downloads.atlassian.com/software/jira/downloads/atlassian-jira-core-${JIRA_VERSION}.tar.gz
 LABEL Description="This image is used to start Atlassian JIRA" Vendor="Atlassian" Version="${JIRA_VERSION}"
 
 # Use the default unprivileged account. This could be considered bad practice
