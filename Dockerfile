@@ -1,5 +1,5 @@
-FROM mimacom/centos7-java:oraclejdk-8u151-b12
-MAINTAINER sysadmin@mimacom.com
+FROM adoptopenjdk:8u212-b03-jdk-hotspot
+LABEL maintainer="sysadmin@flowable.com"
 
 # Setup useful environment variables
 ENV JIRA_HOME     /var/atlassian/application-data/jira
@@ -20,11 +20,10 @@ ENV CATALINA_CONNECTOR_PROXYNAME=
 ENV CATALINA_CONNECTOR_PROXYPORT=
 ENV CATALINA_CONNECTOR_SCHEME=
 
-# download oracle jre8
-RUN yum update -y && \
-    yum install -y epel-release && \
-    yum install -y xmlstarlet && \
-    rm -rf /var/cache/yum/*
+# download requirements
+RUN apt-get update -y && \
+    apt-get install -y xmlstarlet && \
+    rm -rf /var/lib/apt/lists/*
 
 # download jira
 RUN mkdir -p "${JIRA_HOME}" && \

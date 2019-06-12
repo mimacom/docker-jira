@@ -36,7 +36,7 @@ fi
 
 
 
-JAVA_HOME=/opt/java/
+JAVA_HOME=/opt/java/openjdk/
 export JAVA_HOME
 ./bin/catalina.sh run &
 PID=$!
