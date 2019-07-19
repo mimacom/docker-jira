@@ -22,7 +22,7 @@ ENV CATALINA_CONNECTOR_SCHEME=
 
 # download requirements
 RUN apt-get update -y && \
-    apt-get install -y xmlstarlet && \
+    apt-get install -y xmlstarlet fontconfig && \
     rm -rf /var/lib/apt/lists/*
 
 # download jira
