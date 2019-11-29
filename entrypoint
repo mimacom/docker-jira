@@ -11,6 +11,9 @@ then
     echo "${JIRA_HOME}/.jira-home.lock is present ..."
     echo waiting for other node to terminate
   done
+else
+  # If the instance crash unexpectly it is needed removing the lock file in a non-cluster env
+  rm -f ${JIRA_HOME}/.jira-home.lock
 fi
 
 # update server.xml
