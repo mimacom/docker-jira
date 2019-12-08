@@ -12,7 +12,7 @@ then
     echo waiting for other node to terminate
   done
 else
-  # If the instance crash unexpectly it is needed removing the lock file in a non-cluster env
+  # If the instance crashes unexpectly, it's needed to remove the lock file in a non-cluster env
   rm -f ${JIRA_HOME}/.jira-home.lock
 fi
 
